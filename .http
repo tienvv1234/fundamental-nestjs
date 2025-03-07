@@ -1,0 +1,11 @@
+GET http://localhost:3000/coffees?limit=2
+
+###
+POST http://localhost:3000/coffees
+Content-Type: application/json
+
+{
+  "name": "Cappuccino1",
+  "brand": "Starbucks1",
+  "flavors": ["Espresso", "Steamed Milk", "Foam"]
+}
