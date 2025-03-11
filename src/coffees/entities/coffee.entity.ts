@@ -12,6 +12,12 @@ export class Coffee {
     @Column()
     brand: string;
 
+    @Column({ nullable: true })
+    description: string;
+
+    @Column({ default: 0 })
+    recommendations: number;
+    
     @JoinTable() // join table chỉ nên khai báo ở entities owner tức là class cha
     @ManyToMany(
         type => Flavor,

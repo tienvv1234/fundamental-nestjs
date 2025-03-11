@@ -1,13 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
+// define the composite index
+// @Index(['name', 'type'])
 @Entity()
-export class EventEntity {
+export class Event {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
     type: string;
-
+    
+    @Index()
     @Column()
     name: string;
 
