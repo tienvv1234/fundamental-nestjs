@@ -3,11 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from 'src/events/entities/event.entity';
 import { Connection, Repository } from 'typeorm';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
-import { COFFEE_BRANDS } from './coffees.constances';
+// import { COFFEE_BRANDS } from './coffees.constances';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class CoffeesService {
@@ -16,9 +17,12 @@ export class CoffeesService {
         @InjectRepository(Coffee) private readonly coffeeRepository: Repository<Coffee>,
         @InjectRepository(Flavor) private readonly flavorRepository: Repository<Flavor>,
         private readonly connection: Connection,
-        @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+        private readonly configService: ConfigService,
+        // @Inject(COFFEE_BRANDS) coffeeBrands: string[],
     ) {
-        console.log(coffeeBrands);
+        // console.log(coffeeBrands);
+        const databaseHost = this.configService.get<string>('database.host', 'localhost');
+        console.log(databaseHost);
     }
 
     async findAll(paginationQuery: PaginationQueryDto) {

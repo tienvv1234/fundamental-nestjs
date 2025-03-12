@@ -7,26 +7,37 @@ import { Flavor } from './entities/flavor.entity';
 import { Event } from '../events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constances';
 import { Connection } from 'typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
+    imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), ConfigModule],
     controllers: [CoffeesController],
     providers: [
         CoffeesService,
-        {
-            provide: COFFEE_BRANDS, // use this way for constances or enum
-            useFactory: async (connection: Connection): Promise<string[]> => {
-                // const coffeeBrands = await connection.query('SELECT DISTINCT brand FROM coffee');
-                // fake query db to get coffee brands
-                const coffeeBrands = await Promise.resolve(['buddy brew', 'nescafe']);
-                console.log('[!] Async factory');
-                return coffeeBrands;
-            }
-        }
     ],
     exports: [CoffeesService],
 })
 export class CoffeesModule { }
+
+// @Module({
+//     imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
+//     controllers: [CoffeesController],
+//     providers: [
+//         CoffeesService,
+//         {
+//             provide: COFFEE_BRANDS, // use this way for constances or enum
+//             useFactory: async (connection: Connection): Promise<string[]> => {
+//                 // const coffeeBrands = await connection.query('SELECT DISTINCT brand FROM coffee');
+//                 // fake query db to get coffee brands
+//                 const coffeeBrands = await Promise.resolve(['buddy brew', 'nescafe']);
+//                 console.log('[!] Async factory');
+//                 return coffeeBrands;
+//             }
+//         }
+//     ],
+//     exports: [CoffeesService],
+// })
+// export class CoffeesModule { }
 
 
 // class MockCoffeeService { } // cách này không tốt vì không thể inject các dependencies khác và khi chạy trên production sẽ không thể thay thế

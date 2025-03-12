@@ -9,3 +9,13 @@ Content-Type: application/json
   "brand": "Starbucks1",
   "flavors": ["Espresso", "Steamed Milk", "Foam"]
 }
+
+###
+POST http://localhost:3000/coffees/2/recommend
+Content-Type: application/json
+
+{
+  "name": "Cappuccino2",
+  "brand": "Starbucks2",
+  "flavors": ["Espresso", "Steamed Milk", "Foam"]
+}
