@@ -11,16 +11,15 @@ import { ConfigModule } from '@nestjs/config';
 import coffeesConfig from './config/coffees.config';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), 
-        ConfigModule.forFeature(coffeesConfig)
-    ],
-    controllers: [CoffeesController],
-    providers: [
-        CoffeesService,
-    ],
-    exports: [CoffeesService],
+  imports: [
+    TypeOrmModule.forFeature([Coffee, Flavor, Event]),
+    ConfigModule.forFeature(coffeesConfig),
+  ],
+  controllers: [CoffeesController],
+  providers: [CoffeesService],
+  exports: [CoffeesService],
 })
-export class CoffeesModule { }
+export class CoffeesModule {}
 
 // @Module({
 //     imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
@@ -42,7 +41,6 @@ export class CoffeesModule { }
 // })
 // export class CoffeesModule { }
 
-
 // class MockCoffeeService { } // cách này không tốt vì không thể inject các dependencies khác và khi chạy trên production sẽ không thể thay thế
 // @Injectable()
 // export class ConfigService {}
@@ -62,9 +60,9 @@ export class CoffeesModule { }
 //     controllers: [CoffeesController],
 //     // providers: [CoffeesService], // this is short hand
 //     // replace the provider with the mock service
-//     // providers: [{ 
+//     // providers: [{
 //     //     provide: CoffeesService,
-//     //     useValue: new MockCoffeeService() 
+//     //     useValue: new MockCoffeeService()
 //     // }],
 //     // provider with string token
 //     providers: [

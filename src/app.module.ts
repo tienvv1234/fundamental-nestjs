@@ -9,7 +9,6 @@ import appConfig from './config/app.config';
 import { DatabaseModule } from './database/database.module';
 import { APP_PIPE } from '@nestjs/core';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -27,17 +26,18 @@ import { APP_PIPE } from '@nestjs/core';
         autoLoadEntities: true, // models will be loaded automatically (you don't have to explicitly specify the entities: [] array)
         synchronize: true, // your entities will be synced with the database(recommended: disable in production)
         logging: true,
-      })
+      }),
     }),
     CoffeeRatingModule,
-    DatabaseModule
+    DatabaseModule,
   ], // import other modules here
   controllers: [AppController],
-  providers: [AppService, 
+  providers: [
+    AppService,
     // {
     //   provide: APP_PIPE,
     //   useValue: ValidationPipe
     // }
   ], // any provider here will be available only within this module itself unless ad
 })
-export class AppModule { }
+export class AppModule {}
